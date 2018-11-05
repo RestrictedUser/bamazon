@@ -1,3 +1,7 @@
+// ask about markdown files
+//ask about how to get id to translate into item name in console.logs
+//spruce up readMe with screenshots
+
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
@@ -12,9 +16,14 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-connection.query("SELECT * FROM products", function(err,res){
-    if (err) throw err;
-    console.log(res);
+connection.query("SELECT * FROM products", function (err, res) {
+	if (err) throw err;
+	console.log("Item    Product \t\tDepartment \tPrice\t Stock");
+	console.log("------------------------------------------------------------------");
+	for (var i = 0; i < res.length; i++) {
+		console.log(res[i].ItemID + " \t" + res[i].ProductName + "\t" + res[i].DepartmentName + "\t" + res[i].Price + " \t " + res[i].StockQuantity);
+	}
+	console.log("------------------------------------------------------------------");
 
     inquirer
     .prompt([
@@ -29,23 +38,23 @@ connection.query("SELECT * FROM products", function(err,res){
             message: "How many would you like to buy?"
         }
     ])
-    .then(function (productObj) {
-			connection.query('SELECT * FROM products WHERE ?', { ItemID: productObj.product }, function (err, res) {
+    .then(function (answers) {
+			connection.query('SELECT * FROM products WHERE ?', { ItemID: answers.product }, function (err, res) {
 				if (err) throw err;
 				// console.log(res)
-				if (res[0].StockQuantity > productObj.qty) {
+				if (res[0].StockQuantity > answers.qty) {
 
-					var cost = res[0].Price * productObj.qty
+					var cost = res[0].Price * answers.qty
 					console.log("-----------------------------------");
 					console.log("Your order is validated! \nThe total cost is $" + cost.toFixed(2) + "\nThank you for ordering")
 
-					var newQty = res[0].StockQuantity - productObj.qty
+					var newQty = res[0].StockQuantity - answers.qty
 
 					connection.query("UPDATE products SET ? WHERE ?", [{
 						StockQuantity: newQty
 					},
 					{
-						ProductName: productObj.product
+						ProductName: answers.product
 					}],
 
 						function (err, res) {
@@ -53,7 +62,7 @@ connection.query("SELECT * FROM products", function(err,res){
 				}
 				else {
 					console.log("-----------------------------------");
-					console.log("Sorry, we do not have enough in stock. \nWe only have " + res[0].StockQuantity + " units of " + ansProd.product + ". \nPlease retry your order. \nThank you!")
+					console.log("Sorry, we do not have enough in stock. \nWe only have " + res[0].StockQuantity + " units of " + answers.product + ". \nPlease try a different order. \nThank you!")
 				}
 			})
 		
