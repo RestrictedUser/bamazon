@@ -1,1 +1,5 @@
 # bamazon
+Description: 
+-Database that runs an application through node allowing users to make purchases from stores using a item ID.
+- If the item requested has enough stock the user will get a total cost and a message telling them they have a valid order.
+-If the item requested does not have enough stock the user will get a message saying there is not enough stock.
