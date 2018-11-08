@@ -14,20 +14,24 @@ var connection = mysql.createConnection({
     database:"bamazon_db"
 });
 
-connection.connect();
+connection.connect(function(err){
+	if (err) throw err;
+	runSearch();
+});
 
+function runSearch(){
 connection.query("SELECT * FROM products", function (err, res) {
 	if (err) throw err;
-	console.log("Item    Product \t\tDepartment \tPrice\t Stock");
+	console.log("Item    Product      	\tDepartment \tPrice\t Stock");
 	console.log("------------------------------------------------------------------");
 	for (var i = 0; i < res.length; i++) {
-		console.log(res[i].ItemID + " \t" + res[i].ProductName + "\t" + res[i].DepartmentName + "\t" + res[i].Price + " \t " + res[i].StockQuantity);
+		console.log(res[i].ItemID + " \t" + res[i].ProductName + "\t\t" + res[i].DepartmentName + "\t\t" + res[i].Price + " \t " + res[i].StockQuantity);
 	}
 	console.log("------------------------------------------------------------------");
 
     inquirer
     .prompt([
-        {
+		{
             type: "number",
             name: "product",
             message: "What is the id of the product you would like to buy?"
@@ -41,12 +45,26 @@ connection.query("SELECT * FROM products", function (err, res) {
     .then(function (answers) {
 			connection.query('SELECT * FROM products WHERE ?', { ItemID: answers.product }, function (err, res) {
 				if (err) throw err;
-				// console.log(res)
 				if (res[0].StockQuantity > answers.qty) {
 
 					var cost = res[0].Price * answers.qty
 					console.log("-----------------------------------");
-					console.log("Your order is validated! \nThe total cost is $" + cost.toFixed(2) + "\nThank you for ordering")
+					console.log("                        ");
+					console.log("                        ");
+					console.log("                        ");
+					console.log("                        ");
+					console.log("Your order for item #" + answers.product +  " is validated! \nThe total cost is $" + cost.toFixed(2) + "\nThank you for ordering");
+
+					console.log("************************************");
+					console.log("                        ");
+					console.log("                        ");
+					console.log("                        ");
+					console.log("                        ");
+					console.log("                        ");
+					console.log("                        ");
+					console.log("                        ");
+					console.log("                        ");
+					
 
 					var newQty = res[0].StockQuantity - answers.qty
 
@@ -61,10 +79,29 @@ connection.query("SELECT * FROM products", function (err, res) {
 						});
 				}
 				else {
+					console.log("  ");
+					console.log("  ");
+					console.log("  ");
+					console.log("  ");
+					console.log("  ");
+					console.log("  ");
+					console.log("  ");
+					console.log("  ");
+					
+
+
+
+
 					console.log("-----------------------------------");
-					console.log("Sorry, we do not have enough in stock. \nWe only have " + res[0].StockQuantity + " units of " + answers.product + ". \nPlease try a different order. \nThank you!")
+					console.log("Sorry, we do not have enough #"+ answers.product + " in stock. \nWe only have " + res[0].StockQuantity + " units of " + answers.product + ". \nPlease try a different order. \nThank you!")
+					console.log("************************************");
+					console.log("  ");
+					console.log("  ");
+					console.log("  ");
+
 				}
 			})
-		
+		runSearch();
 	})
 });
+}
