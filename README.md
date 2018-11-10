@@ -8,4 +8,4 @@ Description:
 - IMAGES FILE HAS SCREEN SHOTS OF WORKING APPLICATION
 
 CREATED BY: Tyler Middleton
-![alt text](https://github.com/RestrictedUser/bamazon/invalidOrder.PNG)
+![alt text](https://github.com/RestrictedUser/bamazon/blob/master/Images/invalidOrder.PNG?raw=true)
