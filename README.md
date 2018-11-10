@@ -5,7 +5,23 @@ Description:
 - If the item requested does not have enough stock the user will get a message saying there is not enough stock.
 - Each time the app runs the terminal gives you the option to try another item.
 
-- IMAGES FILE HAS SCREEN SHOTS OF WORKING APPLICATION
+
+MAIN MENU:This table shows products information and allows you to select a product by ID.
+![alt text](https://github.com/RestrictedUser/bamazon/blob/master/Images/menu.PNG?raw=true)
+
+CHOOSE A PRODUCT BY ID AND THE AMOUNT YOU WOULD LIKE TO PURCHASE:
+![alt text](https://github.com/RestrictedUser/bamazon/blob/master/Images/product.PNG?raw=true)
+
+
+VALID ORDER: If the amount of the order DOES NOT exceed the stock you will get a VALID order message.
+![alt text](https://github.com/RestrictedUser/bamazon/blob/master/Images/validOrder.PNG?raw=true)
+
+
+INVALID ORDER:If the amount of the order DOES exceed the stock you will get a INVALID order message.
+![alt text](https://github.com/RestrictedUser/bamazon/blob/master/Images/invalidOrder.PNG?raw=true)
+
+
+
+
 
 CREATED BY: Tyler Middleton
-![alt text](https://github.com/RestrictedUser/bamazon/blob/master/Images/invalidOrder.PNG?raw=true)
