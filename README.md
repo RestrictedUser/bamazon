@@ -5,6 +5,7 @@ Description:
 - If the item requested does not have enough stock the user will get a message saying there is not enough stock.
 - Each time the app runs the terminal gives you the option to try another item.
 
+REQUIRED: npm install mysql/require to run.
 
 MAIN MENU:This table shows products information and allows you to select a product by ID.
 ![alt text](https://github.com/RestrictedUser/bamazon/blob/master/Images/menu.PNG?raw=true)
